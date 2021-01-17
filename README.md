@@ -44,7 +44,7 @@ Things you may want to cover:
 - has_many :records
 
 
-## item テーブル
+## items テーブル
 
 | Column             |Type          | Options                    |
 | ------------------ |------------- | -------------------------- |
@@ -66,7 +66,7 @@ Things you may want to cover:
 
 
 
-## record テーブル
+## records テーブル
  
  Column    |Type        | Options                      |
 |--------  |----------- | -----------------------------|
@@ -80,7 +80,7 @@ Things you may want to cover:
 - belongs_to :user
 - has_one    :address
 
-## address テーブル
+## addresses テーブル
 
 
 | Column            |Type        | Options                   |
