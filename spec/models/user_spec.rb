@@ -12,9 +12,13 @@ RSpec.describe User, type: :model do
   end
 
   describe "ユーザー新規登録" do
-    it "ユーザー情報を正しく入力できれば登録できる。" do
-      expect(@user).to be_valid
+    context '新規登録がうまくいくとき' do
+      it "ユーザー情報を正しく入力できれば登録できる。" do
+       expect(@user).to be_valid
+     end
     end
+
+  context '新規登録がうまくいかないとき' do
     it "nicknameが空では登録できない" do
       @user.nickname = ""  # nicknameの値を空にする
       @user.valid?
@@ -48,7 +52,6 @@ RSpec.describe User, type: :model do
       @user.save
       another_user = FactoryBot.build(:user)
       another_user.email = @user.email
-      # binding.pry
       another_user.valid?
       expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
@@ -62,13 +65,6 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
-    end
-    it "重複したemailが存在する場合登録できない" do
-      @user.save
-      another_user = FactoryBot.build(:user)
-      another_user.email = @user.email
-      another_user.valid?
-      expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
     it "メールアドレスは、@を含む必要があること" do
       @user.email = "test" 
@@ -94,7 +90,20 @@ RSpec.describe User, type: :model do
       @user.last_name_kana = "test" 
       @user.valid?
     end
+    it "パスワードは、英語のみでは登録できないこと" do
+      @user.password = "aaaaaa" 
+      @user.valid?
+    end
+    it "パスワードは、数字のみでは登録できないこと" do
+      @user.password = "111111" 
+      @user.valid?
+    end
+    it "パスワードは、全角では登録できないこと" do
+      @user.password = "テストテスト" 
+      @user.valid?
+    end
   end
+end
 end
 
 
