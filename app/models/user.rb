@@ -26,6 +26,6 @@ with_options presence: true, format: { with: /\A[ァ-ヶ]+\z/, message: 'Full-wi
   validates :last_name_kana
 end
 
-validates :password, format: { with: /\A[a-zA-Z0-9]+\z/, message: '半角文字を使用してください' }
+validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: '半角文字を使用してください' }
 
 end
