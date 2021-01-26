@@ -1,5 +1,11 @@
 class Item < ApplicationRecord
 has_one_attached :image
+extend ActiveHash::Associations::ActiveRecordExtensions
+belongs_to_active_hash :category
+belongs_to_active_hash :delivery_area
+belongs_to_active_hash :delivery_date
+belongs_to_active_hash :delivery_fee
+belongs_to_active_hash :state
 
 with_options presence: true do
   validates :name

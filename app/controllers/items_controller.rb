@@ -7,11 +7,24 @@ def new
   @item = Item.new
 end
 
+def create
+  #  binding.pry
+  @item =Item.new(item_params)
+  if @item.save
+    redirect_to root_path
+  else
+    render :new
+  end
+end
+# createアクションの定義
+
+
 private
 
-  def message_params
-    params.require(:item).permit(:content, :image).merge(user_id: current_user.id)
+  def item_params
+    params.require(:item).permit(:name, :text, :category_id, :state_id, :delivery_fee_id, :delivery_area_id, :delivery_date_id, :price).merge(user_id: current_user.id )
   end
+
   def contributor_confirmation
     redirect_to root_path unless current_user == @prototype.user
   end
