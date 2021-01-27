@@ -21,7 +21,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Name can't be blank")
       end
       it "商品の説明が空では登録できない" do
-        @item.text = 1  # emailの値を空にする
+        @item.text = ""  # 値を空にする
         @item.valid?
       end
       it "カテゴリーidが1では登録できない" do

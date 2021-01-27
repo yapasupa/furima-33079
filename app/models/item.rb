@@ -15,7 +15,6 @@ with_options presence: true do
   validates :price
   validates :image
 end
-# validates :price, numericality: { only_integer: true }
 
 with_options numericality: {other_than: 1 }  do
   validates :category_id
