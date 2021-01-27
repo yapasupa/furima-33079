@@ -51,6 +51,7 @@ RSpec.describe Item, type: :model do
       it "商品画像が空では登録できない" do
         @item.image = nil # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
       it "販売価格は半角数字のみ保存可能であること" do
         @item.price = "テスト" 

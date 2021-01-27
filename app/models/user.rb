@@ -28,4 +28,5 @@ end
 
 validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: '半角文字を使用してください' }
 
+has_many :items
 end

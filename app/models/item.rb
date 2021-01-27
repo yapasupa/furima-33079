@@ -7,10 +7,13 @@ belongs_to_active_hash :delivery_date
 belongs_to_active_hash :delivery_fee
 belongs_to_active_hash :state
 
+belongs_to :user
+
 with_options presence: true do
   validates :name
   validates :text 
   validates :price
+  validates :image
 end
 # validates :price, numericality: { only_integer: true }
 
