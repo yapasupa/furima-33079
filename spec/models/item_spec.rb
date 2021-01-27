@@ -22,7 +22,9 @@ RSpec.describe Item, type: :model do
       end
       it "商品の説明が空では登録できない" do
         @item.text = ""  # 値を空にする
+        binding.pry
         @item.valid?
+        expect(@item.errors.full_messages).to include("Text can't be blank")
       end
       it "カテゴリーidが1では登録できない" do
         @item.category_id = 1  # の値を空にする
