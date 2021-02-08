@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_01_21_091727) do
     t.string "name", null: false
     t.text "text", null: false
     t.integer "price", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.integer "category_id", null: false
     t.integer "state_id", null: false
     t.integer "delivery_fee_id", null: false
@@ -67,4 +67,5 @@ ActiveRecord::Schema.define(version: 2021_01_21_091727) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "users"
 end
