@@ -22,50 +22,58 @@ RSpec.describe Item, type: :model do
       end
       it "商品の説明が空では登録できない" do
         @item.text = ""  # 値を空にする
-        binding.pry
         @item.valid?
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
       it "カテゴリーidが1では登録できない" do
         @item.category_id = 1  # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
       it "商品の状態が空では登録できない" do
         @item.state_id = 1  # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("State must be other than 1")
       end
       it "配送料の負担が空では登録できない" do
         @item.delivery_fee_id = 1 # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery fee must be other than 1")
       end
       it "発送元の地域が空では登録できない" do
         @item.delivery_area_id  = 1 # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery area must be other than 1")
       end
       it "発送までの日数が空では登録できない" do
         @item.delivery_date_id = 1 # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery date must be other than 1")
       end
       it "販売価格が空では登録できない" do
         @item.price = "" # の値を空にする
         @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it "商品画像が空では登録できない" do
         @item.image = nil # の値を空にする
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("Price is out of setting range", "Price is not a number")
       end
       it "販売価格は半角数字のみ保存可能であること" do
         @item.price = "テスト" 
         @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "価格の範囲が、¥300未満の時は登録できない" do
         @item.price = 299 # 
         @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
       it "価格の範囲が、¥10000000以上の時は登録できない" do
         @item.price = 10000000 # 
         @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
     end
   end
@@ -109,3 +117,10 @@ end
 # end
 
 # validates :price, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: '半角文字を使用してください' }
+
+
+
+
+
+
+ええfdだfddfddgdfdっだfdガッdfgrっdfgfgっdfdgffが月gfgfsgffgfg；一dkjfごdfkjgぢfdっdいじめいじめいじめjkhっっjhっっjkjkjhkh
