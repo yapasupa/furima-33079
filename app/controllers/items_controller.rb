@@ -16,7 +16,10 @@ def create
     render :new
   end
 end
-# createアクションの定義
+
+def show
+  @item =Item.find(params[:id])
+end
 
 
 private
