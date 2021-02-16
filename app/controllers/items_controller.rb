@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:edit, :show, :update]
   before_action :authenticate_user!, except: [:index, :show]
-  
+
 def index
   @items = Item.all.order("id DESC")
 end
@@ -19,23 +20,24 @@ def create
 end
 
 def show
-  @item =Item.find(params[:id])
 end
 
 def edit
-  @item =Item.find(params[:id])
   if current_user.id != @item.user.id
     redirect_to root_path
   end
 end
 
 def update
-  @item =Item.find(params[:id])
   if @item.update(item_params)
     redirect_to item_path
   else
     render :new
 end
+end
+
+def set_item
+  @item = Item.find(params[:id])
 end
 
 private
@@ -44,11 +46,11 @@ private
     params.require(:item).permit(:name, :text, :category_id, :state_id, :delivery_fee_id, :delivery_area_id, :delivery_date_id, :price, :image).merge(user_id: current_user.id )
   end
 
-  def contributor_confirmation
-    redirect_to root_path unless current_user == @prototype.user
-  end
+
 
 end
+
+
 
 
 
