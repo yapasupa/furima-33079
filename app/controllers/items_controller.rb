@@ -34,20 +34,22 @@ def update
  end
 end                                                                
 
-def set_item
-  @item = Item.find(params[:id])
-end
 
-def move_to_index
-  if current_user.id != @item.user.id
-    redirect_to root_path
-  end
-end
 
 private
 
   def item_params
     params.require(:item).permit(:name, :text, :category_id, :state_id, :delivery_fee_id, :delivery_area_id, :delivery_date_id, :price, :image).merge(user_id: current_user.id )
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  
+  def move_to_index
+    if current_user.id != @item.user.id
+      redirect_to root_path
+    end
   end
 
 
