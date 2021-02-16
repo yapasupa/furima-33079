@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:edit, :show, :update]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :move_to_index, only: [:edit, :update]
+
 def index
   @items = Item.all.order("id DESC")
 end
@@ -18,8 +21,19 @@ def create
 end
 
 def show
-  @item =Item.find(params[:id])
 end
+
+def edit
+end
+
+def update
+  if @item.update(item_params)
+    redirect_to item_path
+  else
+    render :new
+ end
+end                                                                
+
 
 
 private
@@ -28,11 +42,21 @@ private
     params.require(:item).permit(:name, :text, :category_id, :state_id, :delivery_fee_id, :delivery_area_id, :delivery_date_id, :price, :image).merge(user_id: current_user.id )
   end
 
-  def contributor_confirmation
-    redirect_to root_path unless current_user == @prototype.user
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  
+  def move_to_index
+    if current_user.id != @item.user.id
+      redirect_to root_path
+    end
   end
 
+
+
 end
+
+
 
 
 
